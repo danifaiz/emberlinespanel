@@ -22,7 +22,7 @@ class CreateCategoryProjectTable extends Migration
             $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
             
             $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at');
+            $table->timestamp('updated_at')->nullable();
         });
     }
 

@@ -17,7 +17,7 @@ class CreateCategoriesTable extends Migration
             $table->bigIncrements('id');
             $table->string('name',50);
             $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at');
+            $table->timestamp('updated_at')->nullable();
         });
     }
 
