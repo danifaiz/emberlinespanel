@@ -1,4 +1,4 @@
-@extends("layouts.app")
+@extends("layouts.master")
 @section('page_title')
     {{ "Emberlines | Add Project" }}
 @endsection
@@ -7,15 +7,6 @@
 @endsection
 @section('pageStyles')
 <style>
-    .polyp {
-        font-size: 14px; color:black;
-        font-weight:bold;
-    }
-    .scorestyle {
-        font-size: 12px;
-        margin:1% 0%;
-        display:none;
-    }
     #exampleModalLabel {
         font-family: 'Muli','Poppins';
         font-weight: bold;
@@ -27,9 +18,6 @@
     }
     .mt-btm-1 {
        margin-bottom:1em;  
-    }
-    .product_image {
-        margin: 0px 25%;
     }
     .move-right {
         text-align:right;
@@ -46,10 +34,6 @@
     }
     .select2 {
         width:295px;
-    }
-    .dz-progress {
-        /* progress bar covers file name */
-        display: none !important;
     }
 </style>
 @endsection
@@ -88,7 +72,9 @@
                     <div class="row">
                         <div class="col-md-12 myshadow">
                             <div class="move-left">
-                                    {{-- <button type="button" class="btn btn-outline-danger btn-sm reset_filters" >Go Back</button> --}}
+                                <form action="/admin/projects" method="GET">
+                                    <button type="submit" class="btn btn-outline-info btn-sm reset_filters" ><i class="fas fa-arrow-left"></i> Go Back</button>
+                            </form>
                             </div>
                             <div class="row">
                                 <div class="container">
@@ -109,7 +95,7 @@
                                         <label style="text-align: left;">Categories / Tags</label>
                                         <select class="form-control m-select2" multiple name="categories[]" id="categories">
                                             @foreach($categories as $tag)
-                                            <option value="{{$tag['name']}}">{{$tag['name']}}</option>
+                                            <option value="{{$tag['id']}}">{{$tag['name']}}</option>
                                             @endforeach
                                         </select>
                                 </div>
@@ -162,9 +148,11 @@
 @endsection
 
 @section("pageScripts")
+    <script src="{{ asset('ember/addproject.js')}}" type="text/javascript"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.4.0/clipboard.min.js"></script>
     <script>
         var baseUrl = "{{asset('/')}}";
     </script>
     <script src="{{ asset('app/bundle/ember.js')}}"></script>
+    
 @endsection

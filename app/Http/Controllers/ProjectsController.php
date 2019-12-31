@@ -7,6 +7,8 @@ use App\Project;
 use App\Category;
 use App\Gallery;
 use DB;
+use Storage;
+use Session;
 class ProjectsController extends Controller
 {
     /**
@@ -26,6 +28,10 @@ class ProjectsController extends Controller
         $categories = Category::all();
         return $categories;
     }
+    public function listProjects() {
+        $data["projects"] = Project::with('categories')->latest()->get();
+        return view("ember.list_projects",$data);
+    }
     public function addCategoryToProject() {
         $project = Project::find(18);
         $category = Category::find(8);
@@ -41,14 +47,6 @@ class ProjectsController extends Controller
             return ['message'=> "Category $category->name assigned Successfully!"];
 
         }
-
-        // $categories = [
-        // new Category(['name' => 'Vacation']),
-        // new Category(['name' => 'Tropical']),
-        // new Category(['name' => 'Leisure']),
-        // ];
-
-        // $project->categories()->saveMany($categories);
     }
 
     /**
@@ -70,12 +68,25 @@ class ProjectsController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'title' => 'required|unique:Projects|max:255',
-            'description' => 'required',
-            'banner_image'=>'image|nullable|max:1999',
-            'categories'=>'required'
-        ]);
+        if($request->input('project_id')) {
+            //Update Validations
+            $projectId = $request->input('project_id');
+            $validatedData = $request->validate([
+                'title' => "required|unique:Projects,id,$projectId|max:255",
+                'description' => 'required',
+                'banner_image'=>'image|nullable|max:1999',
+                'categories'=>'required'
+            ]);
+        } else {
+            //Insert Validations
+            $validatedData = $request->validate([
+                'title' => "required|unique:Projects|max:255",
+                'description' => 'required',
+                'banner_image'=>'image|nullable|max:1999',
+                'categories'=>'required'
+            ]);
+        }
+        
 
         $files = $_FILES;
         $projectImages = array();
@@ -101,11 +112,20 @@ class ProjectsController extends Controller
                 }
             }
         }
-
-        $project = new Project;
+        if($request->input('project_id')) {
+            //update already saved project
+            $projectId = $request->input('project_id');
+            $project = Project::with('categories')->find($projectId);
+        } else {
+            //create a new project
+            $project = new Project;
+            
+        }
         $project->title = $request->input('title');
         $project->description = $request->input('description');
-        $project->banner_image = $banner_image;
+        if($request->input('banner_image')) {
+            $project->banner_image = $banner_image;
+        }
         $project->save();
 
         // Save Project Gallery Images
@@ -117,12 +137,24 @@ class ProjectsController extends Controller
         $project->gallery()->saveMany($projectGallery);
 
         // Save Project Tags / Categories
-        $categories = array();
-        foreach($request->input("categories") as $category) {
-            array_push($categories,new Category(['name' => $category]));
+        $existingTags = array();
+        if(isset($project->categories)) {
+            foreach($project->categories as $category) {
+                $existingTags[] = $category->id;
+            }
         }
-        $project->categories()->saveMany($categories);
 
+        //First Remove all previous tags linked
+        DB::table('category_project')
+        ->whereIn('category_id', $existingTags)
+        ->where('project_id', $projectId)
+        ->delete(); 
+
+        foreach($request->input("categories") as $category_id) {
+            $category = Category::find($category_id);
+            $project->categories()->save($category);
+            
+        }
 
         return array("status"=>"success","msg"=>"Project Added Successfully");
     }
@@ -149,7 +181,28 @@ class ProjectsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data["project"] = Project::with(['gallery','categories'])->find($id)->toArray();
+        $data["galleryExist"] = count($data["project"]["gallery"]);
+        if($data["galleryExist"]) {
+            foreach($data["project"]["gallery"] as $key => $image) {
+                $mockFile = array(
+                    "imageId"=>$image["id"],
+                    "projectId"=>$image["project_id"],
+                    "name"=>$image["image_name"],
+                    "imageUrl" => url('/') . "/storage/gallery/" . $image["image_name"]
+                );
+                $data["project"]["gallery"][$key] = $mockFile;
+            }
+        }
+        $data["projectTags"] = array();
+        foreach($data["project"]["categories"] as $tag) {
+            $data["projectTags"][] =  $tag["name"];
+        }
+        $data["defaultCategories"] = Category::all();
+        if(is_null($data["project"])) {
+            return redirect('/admin/projects');
+        }
+        return view("ember.edit_project",$data);
     }
 
     /**
@@ -172,6 +225,34 @@ class ProjectsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $project = Project::find($id);
+        if(is_null($project)) {
+            return redirect('/admin/projects');
+        }
+        if($project->banner_image != "default.jpg") {
+            Storage::delete('public/gallery/'.$project->banner_image);
+        }
+        $project->delete();
+        Session::flash('message', 'Project Removed Successfully!'); 
+        Session::flash('alert-class', 'alert-success'); 
+        return redirect('/admin/projects');
     }
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroyGalleryImage($id,Request $request)
+    {
+        
+        $galleryImage = Gallery::find($request->input('imageId'));
+
+        Storage::delete('public/gallery/'.$galleryImage->image_name);
+        
+        $galleryImage->delete();
+        
+        return array("status"=>"success","message"=>"Image removed successfully!");
+    }
+    
 }

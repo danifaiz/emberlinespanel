@@ -32,7 +32,7 @@ var KTDropzoneDemo = function () {
                         alert.parent().removeClass('kt-hide').show();
                         KTUtil.scrollTop();
                         setTimeout(()=>{
-                            alert.parent().addClass('kt-hide').hide();
+                            alert.parent().fadeOut();
                         },3000);
                         return;
                     }
@@ -98,6 +98,7 @@ var KTDropzoneDemo = function () {
                             };
                             let errorMessage = JSON.parse(xhr.responseText);
                             toastr.warning(errorMessage.errors.title[0]);
+                            window.location.href = "/admin/projects";
                         }
                     });
                 });

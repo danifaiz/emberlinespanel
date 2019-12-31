@@ -1,5 +1,31 @@
 "use strict";
 
+var showToaster = function(message,type) {
+    toastr.options = {
+        "closeButton": false,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": false,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    };
+    if(type == "warning") {
+        toastr.warning(message);
+    } else if(type == "success") {
+        toastr.success(message);
+    }
+}
+
+
 var KTDemoPanel = function() {
     var demoPanel = KTUtil.getByID('kt_demo_panel');
     var offcanvas;

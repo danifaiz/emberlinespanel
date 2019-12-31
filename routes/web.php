@@ -11,9 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', "HomeController@index");
 
 Route::get("/admin/project/add","ProjectsController@create");
+Route::get("/admin/project/{id}","ProjectsController@edit");
 Route::post("/saveProject","ProjectsController@store");
+Route::get("/admin/projects","ProjectsController@listProjects");
+Route::delete('/admin/project/remove/{id}', "ProjectsController@destroy");
+Route::delete('/admin/project/remove/image/{id}', "ProjectsController@destroyGalleryImage");
+
+Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');
