@@ -145,11 +145,13 @@ class ProjectsController extends Controller
         }
 
         //First Remove all previous tags linked
-        DB::table('category_project')
-        ->whereIn('category_id', $existingTags)
-        ->where('project_id', $projectId)
-        ->delete(); 
-
+        if($request->input('project_id')) {
+            DB::table('category_project')
+            ->whereIn('category_id', $existingTags)
+            ->where('project_id', $projectId)
+            ->delete();
+        }
+        
         foreach($request->input("categories") as $category_id) {
             $category = Category::find($category_id);
             $project->categories()->save($category);
