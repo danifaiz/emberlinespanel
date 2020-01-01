@@ -142,14 +142,14 @@ License: You must have a valid license purchased only from themeforest(the above
 												<ul class="kt-nav kt-nav--bold kt-nav--md-space kt-margin-t-20 kt-margin-b-20">
 													<li class="kt-nav__item">
 														<a class="kt-nav__link active" href="/admin/project/add">
-															<span class="kt-nav__link-icon"><i class="flaticon2-user"></i></span>
+															<span class="kt-nav__link-icon"><i class="flaticon-add-label-button"></i></span>
 															<span class="kt-nav__link-text">Add Project</span>
 														</a>
 													</li>
 													<li class="kt-nav__separator"></li>
 													<li class="kt-nav__item">
 														<a class="kt-nav__link" href="/admin/projects">
-															<span class="kt-nav__link-icon"><i class="flaticon-feed"></i></span>
+															<span class="kt-nav__link-icon"><i class="flaticon-interface-2"></i></span>
 															<span class="kt-nav__link-text">Show Projects</span>
 														</a>
 													</li>
