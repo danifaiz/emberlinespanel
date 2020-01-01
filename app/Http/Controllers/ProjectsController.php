@@ -11,14 +11,18 @@ use Storage;
 use Session;
 class ProjectsController extends Controller
 {
+    private $imageBasePath;
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct() {
+       $this->imageBasePath = url("/") . "images/";
+    }
     public function index()
     {
-        $projects =  Project::with(array('categories'=>function($query){
+        $projects =  Project::select(DB::raw("id,title,description,banner_image,CONCAT('$this->imageBasePath',projects.banner_image) AS imageUrl,created_at,updated_at"))->with(array('categories'=>function($query){
             $query->select('categories.id','categories.name');
         }))->get();
         return $projects;
@@ -174,7 +178,7 @@ class ProjectsController extends Controller
     public function show($id)
     {
         DB::enableQueryLog(); // Enable query log
-        $project = Project::with(['gallery','categories'])->find($id);
+        $project = Project::select(DB::raw("id,title,description,banner_image,CONCAT('$this->imageBasePath',projects.banner_image) AS imageUrl,created_at,updated_at"))->with(['gallery','categories'])->find($id);
         //dd(DB::getQueryLog()); // Show results of log
         return $project;
     }
