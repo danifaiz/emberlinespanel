@@ -101,8 +101,11 @@ class ProjectsController extends Controller
                     $fileExt = $request->file($key)->getClientOriginalExtension();
         
                     $projectImage = $filename . "_" . time() . "." . $fileExt;
+
+                    Storage::disk('public_uploads')->put("gallery", $projectImage);
+                     
         
-                    $path = $request->file($key)->storeAs("public/gallery", $projectImage);
+                    //$path = $request->file($key)->storeAs("public/gallery", $projectImage);
                     
                     if($key != "banner_image") {
                         array_push($projectImages,['image_name' => $projectImage,"image_type"=>$file["type"],"grid"=>12]);
