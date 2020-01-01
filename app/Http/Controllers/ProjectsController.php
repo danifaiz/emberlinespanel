@@ -18,7 +18,7 @@ class ProjectsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function __construct() {
-       $this->imageBasePath = url("/") . "images/";
+       $this->imageBasePath = url("/") . "//images/";
     }
     public function index()
     {
