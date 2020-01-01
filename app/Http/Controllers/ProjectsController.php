@@ -72,7 +72,7 @@ class ProjectsController extends Controller
             //Update Validations
             $projectId = $request->input('project_id');
             $validatedData = $request->validate([
-                'title' => "required|unique:Projects,id,$projectId|max:255",
+                'title' => "required|unique:projects,id,$projectId|max:255",
                 'description' => 'required',
                 'banner_image'=>'image|nullable|max:1999',
                 'categories'=>'required'
@@ -80,7 +80,7 @@ class ProjectsController extends Controller
         } else {
             //Insert Validations
             $validatedData = $request->validate([
-                'title' => "required|unique:Projects|max:255",
+                'title' => "required|unique:projects|max:255",
                 'description' => 'required',
                 'banner_image'=>'image|nullable|max:1999',
                 'categories'=>'required'
