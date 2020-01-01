@@ -19,7 +19,7 @@ class ProjectsController extends Controller
     public function index()
     {
         $projects =  Project::with(array('categories'=>function($query){
-            $query->select('id','name');
+            $query->select('categories.id','categories.name');
         }))->get();
         return $projects;
     }
