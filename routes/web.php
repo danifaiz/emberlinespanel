@@ -22,3 +22,7 @@ Route::delete('/admin/project/remove/image/{id}', "ProjectsController@destroyGal
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get("/test","ProjectsController@test");
+
+

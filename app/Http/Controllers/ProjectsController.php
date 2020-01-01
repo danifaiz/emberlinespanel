@@ -48,6 +48,10 @@ class ProjectsController extends Controller
 
         }
     }
+    public function test() {
+        $files = Storage::disk('local')->allFiles();
+        dd($files);
+    }
 
     /**
      * Show the form for creating a new Project.
@@ -102,7 +106,7 @@ class ProjectsController extends Controller
         
                     $projectImage = $filename . "_" . time() . "." . $fileExt;
 
-                    Storage::disk('local')->put("gallery", $projectImage);
+                    Storage::disk('local')->put("public/gallery", $projectImage);
                      
         
                     //$path = $request->file($key)->storeAs("public/gallery", $projectImage);
