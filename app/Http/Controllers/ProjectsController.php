@@ -106,10 +106,7 @@ class ProjectsController extends Controller
         
                     $projectImage = $filename . "_" . time() . "." . $fileExt;
 
-                    Storage::disk('local')->put("public/storage/gallery", $projectImage);
-                     
-        
-                    //$path = $request->file($key)->storeAs("public/gallery", $projectImage);
+                    $request->$key->move(public_path('images'), $projectImage);
                     
                     if($key != "banner_image") {
                         array_push($projectImages,['image_name' => $projectImage,"image_type"=>$file["type"],"grid"=>12]);
@@ -198,7 +195,7 @@ class ProjectsController extends Controller
                     "imageId"=>$image["id"],
                     "projectId"=>$image["project_id"],
                     "name"=>$image["image_name"],
-                    "imageUrl" => url('/') . "/storage/gallery/" . $image["image_name"]
+                    "imageUrl" => url('/') . "/images//" . $image["image_name"]
                 );
                 $data["project"]["gallery"][$key] = $mockFile;
             }
@@ -239,7 +236,7 @@ class ProjectsController extends Controller
             return redirect('/admin/projects');
         }
         if($project->banner_image != "default.jpg") {
-            Storage::delete('public/gallery/'.$project->banner_image);
+            Storage::disk('public')->delete('images/'.$project->banner_image);
         }
         $project->delete();
         Session::flash('message', 'Project Removed Successfully!'); 
