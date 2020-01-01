@@ -72,7 +72,7 @@ class ProjectsController extends Controller
             //Update Validations
             $projectId = $request->input('project_id');
             $validatedData = $request->validate([
-                'title' => "required|unique:projects,id,$projectId|max:255",
+                'title' => "required|unique:projects,title,$projectId|max:255",
                 'description' => 'required',
                 'banner_image'=>'image|nullable|max:1999',
                 'categories'=>'required'
@@ -151,7 +151,7 @@ class ProjectsController extends Controller
             ->where('project_id', $projectId)
             ->delete();
         }
-        
+
         foreach($request->input("categories") as $category_id) {
             $category = Category::find($category_id);
             $project->categories()->save($category);
