@@ -55,50 +55,16 @@ var KTDropzoneDemo = function () {
                             KTApp.unblock('#block_app');
                             if (xhr.status == 200)
                             {
-                                toastr.options = {
-                                    "closeButton": false,
-                                    "debug": false,
-                                    "newestOnTop": false,
-                                    "progressBar": false,
-                                    "positionClass": "toast-top-right",
-                                    "preventDuplicates": false,
-                                    "onclick": null,
-                                    "showDuration": "300",
-                                    "hideDuration": "1000",
-                                    "timeOut": "5000",
-                                    "extendedTimeOut": "1000",
-                                    "showEasing": "swing",
-                                    "hideEasing": "linear",
-                                    "showMethod": "fadeIn",
-                                    "hideMethod": "fadeOut"
-                                };
-                    
-                                toastr.success("Project Saved Successfully!");
-                              
+                                showToaster("Project Saved Successfully!","success");
+                                setTimeout(()=>{
+                                    window.location.href = "/admin/projects";
+                                },2000)
                             }
                         },
                         error: function(xhr, error){
                             KTApp.unblock('#block_app');
-                            toastr.options = {
-                                "closeButton": false,
-                                "debug": false,
-                                "newestOnTop": false,
-                                "progressBar": false,
-                                "positionClass": "toast-top-right",
-                                "preventDuplicates": false,
-                                "onclick": null,
-                                "showDuration": "300",
-                                "hideDuration": "1000",
-                                "timeOut": "5000",
-                                "extendedTimeOut": "1000",
-                                "showEasing": "swing",
-                                "hideEasing": "linear",
-                                "showMethod": "fadeIn",
-                                "hideMethod": "fadeOut"
-                            };
                             let errorMessage = JSON.parse(xhr.responseText);
-                            toastr.warning(errorMessage.errors.title[0]);
-                            window.location.href = "/admin/projects";
+                            showToaster(errorMessage,"warning");
                         }
                     });
                 });

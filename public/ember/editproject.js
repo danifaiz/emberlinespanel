@@ -107,9 +107,9 @@ var KTDropzoneDemo = function () {
                             {
                                 showToaster("Project updated Successfully!","success");
                             }
-                            // setTimeout(()=>{
-                            //     window.location.href = "/admin/projects";
-                            // },2000)
+                            setTimeout(()=>{
+                                window.location.href = "/admin/projects";
+                            },2000)
                         },
                         error: function(xhr, error){
                             KTApp.unblock('#block_app');
