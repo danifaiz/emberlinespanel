@@ -102,7 +102,7 @@ class ProjectsController extends Controller
         
                     $projectImage = $filename . "_" . time() . "." . $fileExt;
 
-                    Storage::disk('public_uploads')->put("gallery", $projectImage);
+                    Storage::disk('local')->put("gallery", $projectImage);
                      
         
                     //$path = $request->file($key)->storeAs("public/gallery", $projectImage);
