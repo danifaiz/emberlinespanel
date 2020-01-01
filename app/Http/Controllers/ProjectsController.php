@@ -123,7 +123,7 @@ class ProjectsController extends Controller
         }
         $project->title = $request->input('title');
         $project->description = $request->input('description');
-        if($request->input('banner_image')) {
+        if($request->hasFile("banner_image")) {
             $project->banner_image = $banner_image;
         }
         $project->save();
