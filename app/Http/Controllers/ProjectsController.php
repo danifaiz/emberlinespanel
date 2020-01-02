@@ -193,7 +193,7 @@ class ProjectsController extends Controller
         $project = Project::select(DB::raw("id,title,description,banner_image,CONCAT('$this->imageBasePath',projects.banner_image) AS imageUrl,image_url as cloudUrl,created_at,updated_at"))->with(
             array(
                 'gallery'=>function($query){
-                    $query->select(DB::raw("gallery.id,gallery.image_name,gallery.description,gallery.image_name,CONCAT('$this->imageBasePath',projects.image_name) AS imageUrl,image_url as cloudUrl,created_at,updated_at"));
+                    $query->select(DB::raw("id,image_name,image_type,CONCAT('$this->imageBasePath',image_name) AS imageUrl,image_url as cloudUrl,grid,project_id,created_at,updated_at"));
                 },
                 'categories'=>function($query){
                     $query->select('categories.id','categories.name');
