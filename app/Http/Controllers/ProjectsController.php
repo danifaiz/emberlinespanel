@@ -129,7 +129,7 @@ class ProjectsController extends Controller
                     }
                 }
             }
-        }
+        }   
         if($request->input('project_id')) {
             //update already saved project
             $projectId = $request->input('project_id');
