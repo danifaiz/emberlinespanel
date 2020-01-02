@@ -107,7 +107,10 @@
                                     <tbody>
                                         @foreach($projects as $project)
                                             <tr>
-                                                <td><img width="80" src="/images/{{$project->banner_image}}" alt="{{$project->banner_image}}"></td>
+                                            <td>
+                                                    <img width="80" src="{{$project->image_url}}" alt="{{$project->banner_image}}">
+                                                {{-- <img width="80" src="{{ asset('images/' . $project->banner_image)}}" alt="{{$project->banner_image}}"> --}}
+                                            </td>
                                                 <td>{{$project->title}}</td>
                                                 <td class="wrap-text">{{$project->description}}</td>
                                                 <td>
