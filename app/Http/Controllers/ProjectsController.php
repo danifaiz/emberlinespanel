@@ -113,7 +113,7 @@ class ProjectsController extends Controller
 
                     Cloudder::upload($project_image_name, null);
 
-                    list($width, $height) = getimagesize($image_name);
+                    list($width, $height) = getimagesize($project_image_name);
 
                     $project_image_url= Cloudder::show(Cloudder::getPublicId(), ["width" => $width, "height"=>$height]);
         
