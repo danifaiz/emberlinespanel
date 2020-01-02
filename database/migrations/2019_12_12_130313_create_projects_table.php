@@ -18,6 +18,7 @@ class CreateProjectsTable extends Migration
             $table->string('title',100);
             $table->text('description');
             $table->string('banner_image',250);
+            $table->string('image_url');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable();
         });

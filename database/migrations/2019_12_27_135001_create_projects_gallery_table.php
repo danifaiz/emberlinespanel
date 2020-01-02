@@ -17,6 +17,7 @@ class CreateProjectsGalleryTable extends Migration
             $table->bigIncrements('id');
             $table->char('image_name',100);
             $table->char('image_type',100);
+            $table->string('image_url');
             $table->bigInteger('project_id')->unsigned();
             $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
             $table->smallInteger('grid');

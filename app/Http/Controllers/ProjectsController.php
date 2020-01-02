@@ -9,6 +9,7 @@ use App\Gallery;
 use DB;
 use Storage;
 use Session;
+use JD\Cloudder\Facades\Cloudder;
 class ProjectsController extends Controller
 {
     private $imageBasePath;
@@ -90,7 +91,7 @@ class ProjectsController extends Controller
             $validatedData = $request->validate([
                 'title' => "required|unique:projects|max:255",
                 'description' => 'required',
-                'banner_image'=>'image|nullable|max:1999',
+                'banner_image'=>'image|nullable|mimes:jpeg,bmp,jpg,png|between:1, 6000',
                 'categories'=>'required'
             ]);
         }
@@ -107,15 +108,24 @@ class ProjectsController extends Controller
                     $filename = pathinfo($fileNameWithExtension,PATHINFO_FILENAME);
         
                     $fileExt = $request->file($key)->getClientOriginalExtension();
+
+                    $project_image_name = $request->file($key)->getRealPath();
+
+                    Cloudder::upload($project_image_name, null);
+
+                    list($width, $height) = getimagesize($image_name);
+
+                    $project_image_url= Cloudder::show(Cloudder::getPublicId(), ["width" => $width, "height"=>$height]);
         
                     $projectImage = $filename . "_" . time() . "." . $fileExt;
 
                     $request->$key->move(public_path('images'), $projectImage);
                     
                     if($key != "banner_image") {
-                        array_push($projectImages,['image_name' => $projectImage,"image_type"=>$file["type"],"grid"=>12]);
+                        array_push($projectImages,['image_name' => $projectImage,"image_type"=>$file["type"],"grid"=>12,"image_url"=>$project_image_url]);
                     } else {
                         $banner_image = $projectImage;
+                        $banner_image_url = $project_image_url;
                     }
                 }
             }
@@ -133,6 +143,7 @@ class ProjectsController extends Controller
         $project->description = $request->input('description');
         if($request->hasFile("banner_image")) {
             $project->banner_image = $banner_image;
+            $project->image_url = $banner_image_url;
         }
         $project->save();
 
@@ -178,7 +189,14 @@ class ProjectsController extends Controller
     public function show($id)
     {
         DB::enableQueryLog(); // Enable query log
-        $project = Project::select(DB::raw("id,title,description,banner_image,CONCAT('$this->imageBasePath',projects.banner_image) AS imageUrl,created_at,updated_at"))->with(['gallery','categories'])->find($id);
+        $project = Project::select(DB::raw("id,title,description,banner_image,CONCAT('$this->imageBasePath',projects.banner_image) AS imageUrl,created_at,updated_at"))->with(
+            array(
+                'gallery'=>function($query){
+                    $query->select(DB::raw("gallery.id,gallery.image_name,description,banner_image,CONCAT('$this->imageBasePath',projects.banner_image) AS imageUrl,created_at,updated_at"));
+                },
+            'categories'
+        ),
+        )->find($id);
         //dd(DB::getQueryLog()); // Show results of log
         return $project;
     }
