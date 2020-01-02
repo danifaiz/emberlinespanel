@@ -1,5 +1,13 @@
-
-    "use strict";
+$( function() {
+    $( "#gallery-items" ).sortable({
+        placeholder: "sortable-placeholder",
+        forcePlaceholderSize: true,
+        classes: {
+            "ui-sortable": "highlight"
+        }
+    });
+    $( "#gallery-items" ).disableSelection();
+} );
 // Class definition
 var KTDropzoneDemo = function () {    
     // Private functions
@@ -87,12 +95,23 @@ var KTDropzoneDemo = function () {
                         return;
                     }
                     formData.append('X-CSRF-TOKEN',$('input[name="_token"]').val());
-                    KTApp.block('#block_app', {
-                        overlayColor: '#000000',
-                        type: 'v2',
-                        state: 'success',
-                        message: 'Please wait...'
+                    var idsInOrder = $("#gallery-items").sortable("toArray");
+                    var sortAndGrid = [];
+                    idsInOrder.forEach((orderId) => {
+                       let galleryImageId =  $("#" + orderId).attr('data-image-id');
+                       let grid = $('input[name="grid-' + galleryImageId + '"]:checked').val();
+                       sortAndGrid.push({imageId:galleryImageId,sequence:orderId,grid: grid});
+
                     });
+                    formData.append('sortAndGrid', JSON.stringify( sortAndGrid ));
+                    
+                    // KTApp.block('#block_app', {
+                    //     overlayColor: '#000000',
+                    //     type: 'v2',
+                    //     state: 'success',
+                    //     message: 'Please wait...'
+                    // });
+                    
                     $.ajax({
                         url: '/saveProject',
                         data: formData,
@@ -107,9 +126,9 @@ var KTDropzoneDemo = function () {
                             {
                                 showToaster("Project updated Successfully!","success");
                             }
-                            setTimeout(()=>{
-                                window.location.href = "/admin/projects";
-                            },2000)
+                            // setTimeout(()=>{
+                            //     window.location.href = "/admin/projects";
+                            // },2000)
                         },
                         error: function(xhr, error){
                             KTApp.unblock('#block_app');

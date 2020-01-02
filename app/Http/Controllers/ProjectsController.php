@@ -79,6 +79,7 @@ class ProjectsController extends Controller
      */
     public function store(Request $request)
     {
+        dd($_POST);
         if($request->input('project_id')) {
             //Update Validations
             $projectId = $request->input('project_id');

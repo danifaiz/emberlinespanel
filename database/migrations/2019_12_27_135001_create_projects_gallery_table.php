@@ -21,6 +21,7 @@ class CreateProjectsGalleryTable extends Migration
             $table->bigInteger('project_id')->unsigned();
             $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
             $table->smallInteger('grid');
+            $table->smallInteger('sequence');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable();
         });
