@@ -217,6 +217,7 @@ class ProjectsController extends Controller
                     "imageId"=>$image["id"],
                     "projectId"=>$image["project_id"],
                     "name"=>$image["image_name"],
+                    "cloudUrl"=>$image["image_url"],
                     "imageUrl" => url('/') . "/images//" . $image["image_name"]
                 );
                 $data["project"]["gallery"][$key] = $mockFile;

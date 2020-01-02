@@ -53,7 +53,7 @@ var KTDropzoneDemo = function () {
                     myDropzone.emit("addedfile", mockFile);
 
                     // And optionally show the thumbnail of the file:
-                    myDropzone.emit("thumbnail", mockFile, mockFile.imageUrl);
+                    myDropzone.emit("thumbnail", mockFile, mockFile.cloudUrl);
 
                     // Make sure that there is no progress bar, etc...
                     myDropzone.emit("complete", mockFile);
