@@ -23,8 +23,10 @@ class ProjectsController extends Controller
     }
     public function index()
     {
-        $projects =  Project::select(DB::raw("id,title,description,banner_image,CONCAT('$this->imageBasePath',projects.banner_image) AS imageUrl,image_url as cloudUrl, created_at,updated_at"))->with(array('categories'=>function($query){
-            $query->select('categories.id','categories.name');
+        $projects =  Project::select(DB::raw("id,title,description,banner_image,CONCAT('$this->imageBasePath',projects.banner_image) AS imageUrl,image_url as cloudUrl, created_at,updated_at"))->with(
+            array(
+                'categories'=>function($query){
+                    $query->select('categories.id','categories.name');
         }))->get();
         return $projects;
     }
@@ -188,16 +190,16 @@ class ProjectsController extends Controller
      */
     public function show($id)
     {
-        DB::enableQueryLog(); // Enable query log
         $project = Project::select(DB::raw("id,title,description,banner_image,CONCAT('$this->imageBasePath',projects.banner_image) AS imageUrl,image_url as cloudUrl,created_at,updated_at"))->with(
             array(
                 'gallery'=>function($query){
                     $query->select(DB::raw("gallery.id,gallery.image_name,gallery.description,gallery.image_name,CONCAT('$this->imageBasePath',projects.image_name) AS imageUrl,image_url as cloudUrl,created_at,updated_at"));
                 },
-            'categories'
-        ),
-        )->find($id);
-        //dd(DB::getQueryLog()); // Show results of log
+                'categories'=>function($query){
+                    $query->select('categories.id','categories.name');
+                }
+                ),
+        )->where('id', $id)->get();
         return $project;
     }
 
