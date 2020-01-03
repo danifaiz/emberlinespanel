@@ -10,7 +10,7 @@ var KTDropzoneDemo = function () {
             transformFile: function(file, done) { },
             maxFiles: 15,
             autoProcessQueue: false,
-            maxFilesize: 5, // MB
+            maxFilesize: 25, // MB
             addRemoveLinks: true,
             acceptedFiles: "image/*",
             timeout: 500000,
