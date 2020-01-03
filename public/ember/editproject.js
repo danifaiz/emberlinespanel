@@ -96,21 +96,22 @@ var KTDropzoneDemo = function () {
                     }
                     formData.append('X-CSRF-TOKEN',$('input[name="_token"]').val());
                     var idsInOrder = $("#gallery-items").sortable("toArray");
+                    console.log(idsInOrder);
+                    
                     var sortAndGrid = [];
-                    idsInOrder.forEach((orderId) => {
-                       let galleryImageId =  $("#" + orderId).attr('data-image-id');
+                    for (position = 0; position < idsInOrder.length; ++position) {
+                       let galleryImageId =  $("#" + idsInOrder[position]).attr('data-image-id');
                        let grid = $('input[name="grid-' + galleryImageId + '"]:checked').val();
-                       sortAndGrid.push({imageId:galleryImageId,sequence:orderId,grid: grid});
-
-                    });
+                       sortAndGrid.push({imageId:galleryImageId,sequence:position+1,grid: grid});
+                    }
                     formData.append('sortAndGrid', JSON.stringify( sortAndGrid ));
                     
-                    // KTApp.block('#block_app', {
-                    //     overlayColor: '#000000',
-                    //     type: 'v2',
-                    //     state: 'success',
-                    //     message: 'Please wait...'
-                    // });
+                    KTApp.block('#block_app', {
+                        overlayColor: '#000000',
+                        type: 'v2',
+                        state: 'success',
+                        message: 'Please wait...'
+                    });
                     
                     $.ajax({
                         url: '/saveProject',

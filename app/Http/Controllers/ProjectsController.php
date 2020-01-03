@@ -79,7 +79,6 @@ class ProjectsController extends Controller
      */
     public function store(Request $request)
     {
-        dd($_POST);
         if($request->input('project_id')) {
             //Update Validations
             $projectId = $request->input('project_id');
@@ -180,6 +179,19 @@ class ProjectsController extends Controller
             
         }
 
+        //Save Grid & Order
+        if($request->input("sortAndGrid")) {
+            $sortAndGrid = json_decode($request->input("sortAndGrid"),true);
+            foreach($sortAndGrid as $galleryImage) {
+                $gallery = Gallery::find($galleryImage['imageId']);
+                if($gallery) {
+                    $gallery->grid = $galleryImage["grid"];
+                    $gallery->sequence = $galleryImage["sequence"];
+                    $gallery->save();
+                }
+            }
+        }
+
         return array("status"=>"success","msg"=>"Project Added Successfully");
     }
 
@@ -194,7 +206,7 @@ class ProjectsController extends Controller
         $project = Project::select(DB::raw("id,title,description,banner_image,CONCAT('$this->imageBasePath',projects.banner_image) AS imageUrl,image_url as cloudUrl,created_at,updated_at"))->with(
             array(
                 'gallery'=>function($query){
-                    $query->select(DB::raw("id,image_name,image_type,CONCAT('$this->imageBasePath',image_name) AS imageUrl,image_url as cloudUrl,grid,project_id,created_at,updated_at"));
+                    $query->select(DB::raw("id,image_name,image_type,sequence,CONCAT('$this->imageBasePath',image_name) AS imageUrl,image_url as cloudUrl,grid,project_id,created_at,updated_at"))->orderBy('sequence', 'asc');
                 },
                 'categories'=>function($query){
                     $query->select('categories.id','categories.name');
@@ -212,7 +224,14 @@ class ProjectsController extends Controller
      */
     public function edit($id)
     {
-        $data["project"] = Project::with(['gallery','categories'])->find($id)->toArray();
+        $data["project"] = Project::with(
+            array(
+                'gallery'=>function($query){
+                    $query->select(DB::raw("*"))->orderBy('sequence', 'asc');
+                },
+                'categories'
+            ),
+        )->find($id)->toArray();
         $data["galleryExist"] = count($data["project"]["gallery"]);
         if($data["galleryExist"]) {
             foreach($data["project"]["gallery"] as $key => $image) {
