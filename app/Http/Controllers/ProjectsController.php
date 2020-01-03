@@ -182,12 +182,14 @@ class ProjectsController extends Controller
         //Save Grid & Order
         if($request->input("sortAndGrid")) {
             $sortAndGrid = json_decode($request->input("sortAndGrid"),true);
-            foreach($sortAndGrid as $galleryImage) {
-                $gallery = Gallery::find($galleryImage['imageId']);
-                if($gallery) {
-                    $gallery->grid = $galleryImage["grid"];
-                    $gallery->sequence = $galleryImage["sequence"];
-                    $gallery->save();
+            if(!empty($sortAndGrid)) {
+                foreach($sortAndGrid as $galleryImage) {
+                    $gallery = Gallery::find($galleryImage['imageId']);
+                    if($gallery) {
+                        $gallery->grid = $galleryImage["grid"];
+                        $gallery->sequence = $galleryImage["sequence"];
+                        $gallery->save();
+                    }
                 }
             }
         }
