@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
-
+use App\Mail\InquiryMail;
 class HomeController extends Controller
 {
     /**
@@ -13,7 +13,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     /**
@@ -25,4 +25,16 @@ class HomeController extends Controller
     {
         return redirect('/admin/projects');
     }
+
+    public function mail()
+    {
+        $inquiry = [
+            'name' => 'Mark Hussy',
+            'message' => 'Mark Hussy'
+        ];
+        Mail::to('xmark030@gmail.com')->send(new InquiryMail($inquiry));
+        
+        return 'Email was sent';
+    }
+    
 }
