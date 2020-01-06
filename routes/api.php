@@ -21,3 +21,5 @@ Route::get("projects","ProjectsController@index");
 Route::get("categories","ProjectsController@categories");
 Route::get("bindTagToProject","ProjectsController@addCategoryToProject");
 Route::get('project/{projectId}', 'ProjectsController@show');
+
+Route::post('/sendInquiry', 'ProjectsController@mail');

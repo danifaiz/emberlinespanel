@@ -10,6 +10,8 @@ use DB;
 use Storage;
 use Session;
 use JD\Cloudder\Facades\Cloudder;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\InquiryMail;
 class ProjectsController extends Controller
 {
     private $imageBasePath;
@@ -306,6 +308,21 @@ class ProjectsController extends Controller
         $galleryImage->delete();
         
         return array("status"=>"success","message"=>"Image removed successfully!");
+    }
+    
+    //Contact form email
+    public function mail(Request $request)
+    {
+        $inquiry = [
+            'name' => $request->input('name'),
+            'message' => $request->input('msg'),
+            'contact'=> $request->input('contact'),
+            'email'=> $request->input('email')
+        ];
+        
+        Mail::to($request->input('email'))->send(new InquiryMail($inquiry));
+        
+        return array("status"=>"success","message"=>"Email was sent!");
     }
     
 }

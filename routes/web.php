@@ -25,6 +25,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get("/test","ProjectsController@test");
 
-Route::get('/send/email', 'HomeController@mail');
+
 
 

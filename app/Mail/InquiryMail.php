@@ -30,6 +30,8 @@ class InquiryMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Mail from Emberlinestudios')->view('emails.inquiryMail');
+        return $this->subject('Mail from Emberlinestudios')
+                    ->replyTo($this->inquiry['email'], $this->inquiry['name'])
+                    ->view('emails.inquiryMail');
     }
 }
