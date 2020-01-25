@@ -23,3 +23,5 @@ Route::get("bindTagToProject","ProjectsController@addCategoryToProject");
 Route::get('project/{projectId}', 'ProjectsController@show');
 
 Route::post('/sendInquiry', 'ProjectsController@mail');
+
+Route::get("/setCloudinarySecureLinks","ProjectsController@setCloudinarySecureLinks");

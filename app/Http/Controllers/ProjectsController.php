@@ -57,9 +57,14 @@ class ProjectsController extends Controller
 
         }
     }
-    public function test() {
-        $files = Storage::disk('local')->allFiles();
-        dd($files);
+    public function setCloudinarySecureLinks() {
+        // $files = Storage::disk('local')->allFiles();
+        // dd($files);
+        DB::raw("UPDATE projects
+        SET image_url = REPLACE(image_url, 'http', 'https')");
+        DB::raw("UPDATE projects_gallery
+        SET image_url = REPLACE(image_url, 'http', 'https')");
+        return ["message"=>"success"];
     }
 
     /**
@@ -119,7 +124,7 @@ class ProjectsController extends Controller
 
                     list($width, $height) = getimagesize($project_image_name);
 
-                    $project_image_url= Cloudder::show(Cloudder::getPublicId(), ["width" => $width, "height"=>$height]);
+                    $project_image_url= Cloudder::secureShow(Cloudder::getPublicId(), ["width" => $width, "height"=>$height]);
         
                     $projectImage = $filename . "_" . time() . "." . $fileExt;
 
