@@ -319,8 +319,8 @@ class ProjectsController extends Controller
             'contact'=> $request->input('contact'),
             'email'=> $request->input('email')
         ];
-        $emails = ['abrar@emberlinestudios.com', 'asad@emberlinestudios.com','saad@emberlinestudios.com','hello@emberlinestudios.com'];
-        //$emails = ['xmark030@gmail.com', 'danifaiz30@gmail.com'];
+        // $emails = ['abrar@emberlinestudios.com', 'asad@emberlinestudios.com','saad@emberlinestudios.com','hello@emberlinestudios.com'];
+        $emails = ['xmark030@gmail.com', 'danifaiz30@gmail.com'];
         $result = Mail::to($emails)->send(new InquiryMail($inquiry));
         return array("status"=>"Thank you","message"=>"We've received your request, our team will get in touch with you shortly.");
     }
