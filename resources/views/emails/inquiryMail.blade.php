@@ -1,184 +1,401 @@
+<!doctype html>
 <html>
-  
   <head>
-    <title>Emberlinestudios | Inquiry</title>
-    <link rel="shortcut icon" href="{{asset('media/logos/favicon.ico')}}" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,">
-    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet"
-    type="text/css">
-    <style type="text/css">
-      .appleLinksWhite a {color: #ffffff !important; text-decoration: none;}  
-        .appleLinksBlack a {color: #000000 !important; text-decoration: none;} 
-        .appleLinksGrey a {color: #5e656b !important; text-decoration: none;}
-        table { display: table; }
-        /*body .button a:hover { background-color: #6E9924 !important; }*/
-        .button:hover { background-color: #6E9924 !important; }
-        a.hover:hover { color: #4CB7EF !important; }
-        @media screen and (max-width: 550px) {.bgcolor1 {padding: 20px 5% 20px 5% !important; Background: #D1E5F5; Border-radius: 0px;} .txt {font-size: 20px !important; Line-height: 28px !important; Padding: 10px 5% !important; Text-align: left !important;} .txtC {font-size: 20px !important; Line-height: 28px !important; Padding: 10px 5% !important; Text-align: center !important;} .txt1 {font-size: 26px !important; Font-weight: bold !important; Line-height: 36px !important; Padding: 10px 5% !important;} .txt2 { text-align: center;} .txt3 { padding: 10px 5% 5px 5% !important; Text-align: center !important; Font-size: 36px !important; Line-height: 44px!important;} .txt4 {padding: 5px 5% 10px 5%; Text-align: center; Font-size: 20px !important; Line-height: 28px !important;} .txt5 {padding: 5px 5% 30px 5%; Text-align: center; Font-size: 18px !important; Line-height: 28px !important;} .mobile-hide {display: none !important;} .mobile-show {display: inline !important} .mobile-center {text-align: center !important} .mobile-width {padding: 0px !important; width: 100% .mobile-clear-pad {padding: 30px !important;}}
-        @media only screen and (max-width: 550px) {
-            table { width: 100% !important; }
-            table.button { width: 100% !important; display: table; }
-            td.logo img { max-width: 175px !important }
-            .centerImg { width: 100%; }
-            td.text { text-align: left; }
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Support | Emberlinestudios</title>
+    <style>
+      /* -------------------------------------
+          GLOBAL RESETS
+      ------------------------------------- */
+      
+      /*All the styling goes here*/
+      
+      img {
+        border: none;
+        -ms-interpolation-mode: bicubic;
+        max-width: 100%; 
+      }
+
+      body {
+        background-color: #f6f6f6;
+        font-family: sans-serif;
+        -webkit-font-smoothing: antialiased;
+        font-size: 14px;
+        line-height: 1.4;
+        margin: 0;
+        padding: 0;
+        -ms-text-size-adjust: 100%;
+        -webkit-text-size-adjust: 100%; 
+      }
+
+      table {
+        border-collapse: separate;
+        mso-table-lspace: 0pt;
+        mso-table-rspace: 0pt;
+        width: 100%; }
+        table td {
+          font-family: sans-serif;
+          font-size: 14px;
+          vertical-align: top; 
+      }
+
+      /* -------------------------------------
+          BODY & CONTAINER
+      ------------------------------------- */
+
+      .body {
+        background-color: #f6f6f6;
+        width: 100%; 
+      }
+
+      /* Set a max-width, and make it display as block so it will automatically stretch to that width, but will also shrink down on a phone or something */
+      .container {
+        display: block;
+        margin: 0 auto !important;
+        /* makes it centered */
+        max-width: 580px;
+        padding: 10px;
+        width: 580px; 
+      }
+
+      /* This should also be a block element, so that it will fill 100% of the .container */
+      .content {
+        box-sizing: border-box;
+        display: block;
+        margin: 0 auto;
+        max-width: 580px;
+        padding: 10px; 
+      }
+
+      /* -------------------------------------
+          HEADER, FOOTER, MAIN
+      ------------------------------------- */
+      .main {
+        background: #ffffff;
+        border-radius: 3px;
+        width: 100%; 
+      }
+
+      .wrapper {
+        box-sizing: border-box;
+        padding: 20px; 
+      }
+
+      .content-block {
+        padding-bottom: 10px;
+        padding-top: 10px;
+      }
+
+      .footer {
+        clear: both;
+        margin-top: 10px;
+        text-align: center;
+        width: 100%; 
+      }
+        .footer td,
+        .footer p,
+        .footer span,
+        .footer a {
+          color: #999999;
+          font-size: 12px;
+          text-align: center; 
+      }
+
+      /* -------------------------------------
+          TYPOGRAPHY
+      ------------------------------------- */
+      h1,
+      h2,
+      h3,
+      h4 {
+        color: #000000;
+        font-family: sans-serif;
+        font-weight: 400;
+        line-height: 1.4;
+        margin: 0;
+        margin-bottom: 30px; 
+      }
+
+      h1 {
+        font-size: 35px;
+        font-weight: 300;
+        text-align: center;
+        text-transform: capitalize; 
+      }
+
+      p,
+      ul,
+      ol {
+        font-family: sans-serif;
+        font-size: 14px;
+        font-weight: normal;
+        margin: 0;
+        margin-bottom: 15px; 
+      }
+        p li,
+        ul li,
+        ol li {
+          list-style-position: inside;
+          margin-left: 5px; 
+      }
+
+      a {
+        color: #3498db;
+        text-decoration: underline; 
+      }
+
+      /* -------------------------------------
+          BUTTONS
+      ------------------------------------- */
+      .btn {
+        box-sizing: border-box;
+        width: 100%; }
+        .btn > tbody > tr > td {
+          padding-bottom: 15px; }
+        .btn table {
+          width: auto; 
+      }
+        .btn table td {
+          background-color: #ffffff;
+          border-radius: 5px;
+          text-align: center; 
+      }
+        .btn a {
+          background-color: #ffffff;
+          border: solid 1px #3498db;
+          border-radius: 5px;
+          box-sizing: border-box;
+          color: #3498db;
+          cursor: pointer;
+          display: inline-block;
+          font-size: 14px;
+          font-weight: bold;
+          margin: 0;
+          padding: 12px 25px;
+          text-decoration: none;
+          text-transform: capitalize; 
+      }
+
+      .btn-primary table td {
+        background-color: #3498db; 
+      }
+
+      .btn-primary a {
+        background-color: #3498db;
+        border-color: #3498db;
+        color: #ffffff; 
+      }
+
+      /* -------------------------------------
+          OTHER STYLES THAT MIGHT BE USEFUL
+      ------------------------------------- */
+      .last {
+        margin-bottom: 0; 
+      }
+
+      .first {
+        margin-top: 0; 
+      }
+
+      .align-center {
+        text-align: center; 
+      }
+
+      .align-right {
+        text-align: right; 
+      }
+
+      .align-left {
+        text-align: left; 
+      }
+
+      .clear {
+        clear: both; 
+      }
+
+      .mt0 {
+        margin-top: 0; 
+      }
+
+      .mb0 {
+        margin-bottom: 0; 
+      }
+
+      .preheader {
+        color: transparent;
+        display: none;
+        height: 0;
+        max-height: 0;
+        max-width: 0;
+        opacity: 0;
+        overflow: hidden;
+        mso-hide: all;
+        visibility: hidden;
+        width: 0; 
+      }
+
+      .powered-by a {
+        text-decoration: none; 
+      }
+
+      hr {
+        border: 0;
+        border-bottom: 1px solid #f6f6f6;
+        margin: 20px 0; 
+      }
+
+      /* -------------------------------------
+          RESPONSIVE AND MOBILE FRIENDLY STYLES
+      ------------------------------------- */
+      @media only screen and (max-width: 620px) {
+        table[class=body] h1 {
+          font-size: 28px !important;
+          margin-bottom: 10px !important; 
         }
+        table[class=body] p,
+        table[class=body] ul,
+        table[class=body] ol,
+        table[class=body] td,
+        table[class=body] span,
+        table[class=body] a {
+          font-size: 16px !important; 
+        }
+        table[class=body] .wrapper,
+        table[class=body] .article {
+          padding: 10px !important; 
+        }
+        table[class=body] .content {
+          padding: 0 !important; 
+        }
+        table[class=body] .container {
+          padding: 0 !important;
+          width: 100% !important; 
+        }
+        table[class=body] .main {
+          border-left-width: 0 !important;
+          border-radius: 0 !important;
+          border-right-width: 0 !important; 
+        }
+        table[class=body] .btn table {
+          width: 100% !important; 
+        }
+        table[class=body] .btn a {
+          width: 100% !important; 
+        }
+        table[class=body] .img-responsive {
+          height: auto !important;
+          max-width: 100% !important;
+          width: auto !important; 
+        }
+      }
+
+      /* -------------------------------------
+          PRESERVE THESE STYLES IN THE HEAD
+      ------------------------------------- */
+      @media all {
+        .ExternalClass {
+          width: 100%; 
+        }
+        .ExternalClass,
+        .ExternalClass p,
+        .ExternalClass span,
+        .ExternalClass font,
+        .ExternalClass td,
+        .ExternalClass div {
+          line-height: 100%; 
+        }
+        .apple-link a {
+          color: inherit !important;
+          font-family: inherit !important;
+          font-size: inherit !important;
+          font-weight: inherit !important;
+          line-height: inherit !important;
+          text-decoration: none !important; 
+        }
+        #MessageViewBody a {
+          color: inherit;
+          text-decoration: none;
+          font-size: inherit;
+          font-family: inherit;
+          font-weight: inherit;
+          line-height: inherit;
+        }
+        .btn-primary table td:hover {
+          background-color: #34495e !important; 
+        }
+        .btn-primary a:hover {
+          background-color: #34495e !important;
+          border-color: #34495e !important; 
+        } 
+      }
+
     </style>
-    <!--[if mso]|(IE)>
-      <style type="text/css">
-        body, table, td, h1, h2, h3, h4, h5, span {font-family: Lato, Arial, Helvetica, sans-serif !important; mso-line-height-rule:exactly;}
-      </style>
-    <![endif]-->
   </head>
-  
-  <body style="font-family: Lato, Arial, Helvetica, sans-serif !important;; font-size: 14px; margin: 0; padding: 0; color: #5e656b;">
-    <style type="text/css">
-      div#emailPreHeader{ display: none !important; }
-    </style>
-    <div id="emailPreHeader" style="mso-hide:all; visibility:hidden; opacity:0; color:transparent; mso-line-height-rule:exactly; line-height:0; font-size:0px; overflow:hidden; border-width:0; display:none !important;">Let's take a look at all we have accomplished
-      <div style="display: none; max-height: 0px; overflow: hidden;">&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;</div>
-    </div>
-    <table style="width: 100%; border-collapse: collapse; background-color: #F7F7F8; background-image: url(); font-family: Lato, Arial, Helvetica, sans-serif !important;; font-size: 14px; margin: 0; padding: 0; color: #5e656b;"
-    cellpadding="0" cellspacing="0">
-      <tbody>
-        <tr>
-          <td class="mktoContainer" id="container" align="center" style="word-break: break-word;">
-            <table style="width: 500px; border-collapse: collapse; border-spacing: 0; margin: 0 auto; position: relative; background-color: #F7F7F8;"
-            class="mktoModule" id="centerImage96c7c84c-8227-4827-ad6d-3468e50b0f58">
-              <tbody>
-                <tr>
-                  <td align="center" style="padding: 30px 30px 0px 30px;" class="centerImg">
-                    <div class="mktoImg" id="centerImg96c7c84c-8227-4827-ad6d-3468e50b0f58" mktolockimgsize="false">
-                      <a href="https://emberlinestudios.com" target="_blank">
-                        <img border="0" src="{{asset('media/logos/Down.png')}}"
-                        width="194" height="69" alt="Central" style="font-family: Helvetica, Arial, sans-serif; color: #5e656b; font-size: 16px;">
-                      </a>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <table style="width: 500px; border-collapse: collapse; border-spacing: 0; margin: 0 auto; position: relative; padding: 0;  background-color: #F7F7F8; background-image: url();"
-            class="mktoModule" id="bodyText29c88a0d-a584-44bc-9ea8-d95d9846fad82707a3dc-9a12-4779-afce-380dd15a5f84b0bf52aa-6439-4ffa-94d9-f8aea64f4410"
-            cellpadding="0" cellspacing="0">
-              <tbody>
-                <tr>
-                  <td class="mktoText" id="trBodyText29c88a0d-a584-44bc-9ea8-d95d9846fad82707a3dc-9a12-4779-afce-380dd15a5f84b0bf52aa-6439-4ffa-94d9-f8aea64f4410">
-                    <img src="https://lp.logmeininc.com/rs/677-XNU-203/images/Banner_Central_500x500-EOY-Banner.png"
-                    alt="A 2019 Year in Review" width="100%" imagepreview="false" style="display: block; border: 0;"
-                    constrain="true" cellpadding="0" cellspacing="0" role="presentation">
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <table style="width: 500px; border-collapse: collapse; border-spacing: 0; margin: 0 auto; position: relative; padding: 0;  background-color: #74D1EA; background-image: url();"
-            class="mktoModule" id="bodyText29c88a0d-a584-44bc-9ea8-d95d9846fad82707a3dc-9a12-4779-afce-380dd15a5f845c98c239-a43b-4d7d-9541-360349e6f66cb3dd264d-0a96-4696-9149-ca2793e2dd22"
-            cellpadding="0" cellspacing="0">
-              <tbody>
-                <tr>
-                  <td class="mktoText" id="trBodyText29c88a0d-a584-44bc-9ea8-d95d9846fad82707a3dc-9a12-4779-afce-380dd15a5f845c98c239-a43b-4d7d-9541-360349e6f66cb3dd264d-0a96-4696-9149-ca2793e2dd22">
-                    <table style="width: 100%; border-collapse: collapse;">
-                      <tbody>
-                        <tr>
-                          <td style="padding: 0px 40px 40px 40px;" align="center">
-                            <table style="border-collapse: collapse; border-spacing: 0; color: #00587e;">
-                              <tbody>
-                                <tr>
-                                  <td class="mobile-center" align="left" style="font-size: 26px; line-height: 30px; color: #ffffff; text-align: center; text-shadow: 1px 1px #00587e;">Emberlinestudios Client Inquiry</td>
-                                </tr>
-                                <tr>
-                                  <td style="padding: 30px 0px 0px; display: block; font-size: 16px; line-height: 24px; text-align: center;"
-                                class="text"><strong>{{ $inquiry['message'] }}</strong>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <table style="width: 500px; border-collapse: collapse; border-spacing: 0; margin: 0 auto; position: relative; padding: 0; background-color: #74D1EA; background-image: url();"
-            class="mktoModule" id="subBox846b6b7a-b1a4-44d9-9c5b-a6de6c5961c2a50a9bf0-7140-4680-bd9f-2a7456f74218"
-            cellpadding="0" cellspacing="0">
-              <tbody>
-                <tr>
-                  <td style="padding: ;" class="mktoText" id="trSubBox846b6b7a-b1a4-44d9-9c5b-a6de6c5961c2a50a9bf0-7140-4680-bd9f-2a7456f74218">
-                    <center>
-                      <table align="center;" style="padding: 0px 40px 0px 40px; width: 100%; border-collapse: collapse; background-color: #00587e; max-width: 420px; text-align: center;"
-                      width="100%">
-                        <tbody>
-                          <tr>
-                            <!--[if (gte mso 9)|(IE)]>
-                              <tr>
-                                <td align="center" valign="top">
-                                  <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation">
-                                  <![endif]-->
-                                  <td class="mobile-width" style="padding: 0px; background-color: #00587e;" align="center">
-                                    <table style="border-collapse: collapse; border-spacing: 0; color: 16px;">
-                                      <tbody>
-                                        <tr>
-                                          <td align="center" class="text mobile-center" style="padding: 30px; display: block; text-align: center; font-size: 48px; line-height: 60px; color: #ffffff; font-weight: 900;">{{ $inquiry['name'] }}</td>
-                                        </tr>
-                                      </tbody>
-                                    </table>
-                                  </td>
-                                  <!--[if (gte mso 9)|(IE)]>
-                                  </table>
-                                </td>
-                              </tr>
-                            <![endif]-->
-                          </tr>
-                        </tbody>
-                      </table>
-                    </center>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <table style="width: 500px; border-collapse: collapse; border-spacing: 0; margin: 0 auto; position: relative; padding: 0; background-color: #FFFFFF; background-image: url();"
-            class="mktoModule" id="subBox846b6b7a-b1a4-44d9-9c5b-a6de6c5961c240be321b-f876-4e34-a454-de511307a6b5"
-            cellpadding="0" cellspacing="0">
-              <tbody>
-                <tr>
-                  <td style="padding: ;" class="mktoText" id="trSubBox846b6b7a-b1a4-44d9-9c5b-a6de6c5961c240be321b-f876-4e34-a454-de511307a6b5">
-                    <center>
-                      <table align="center;" style="padding: 0px 40px 0px 40px; width: 100%; border-collapse: collapse; background-color: #00587e; max-width: 420px; text-align: center;"
-                      width="100%">
-                        <tbody>
-                          <tr>
-                            <!--[if (gte mso 9)|(IE)]>
-                              <tr>
-                                <td align="center" valign="top">
-                                  <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation">
-                                  <![endif]-->
-                                  <td class="mobile-width" style="padding: 0px; background-color: #00587e;" align="center">
-                                    <table style="border-collapse: collapse; border-spacing: 0; color: 16px;">
-                                      <tbody>
-                                        <tr>
-                                          <td align="center" class="text mobile-center" style="padding: 0px 40px 40px 40px; display: block; text-align: center; font-size: 26px; line-height: 32px; color: #ffffff;">{{ $inquiry['contact'] }}
-                                            <br>{{ $inquiry['email'] }}</td>
-                                        </tr>
-                                      </tbody>
-                                    </table>
-                                  </td>
-                                  <!--[if (gte mso 9)|(IE)]>
-                                  </table>
-                                </td>
-                              </tr>
-                            <![endif]-->
-                          </tr>
-                        </tbody>
-                      </table>
-                    </center>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-           
+  <body class="">
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
+      <tr>
+        <td>&nbsp;</td>
+        <td class="container">
+          <div class="content">
 
-   &nbsp;</body>
+            <!-- START CENTERED WHITE CONTAINER -->
+            <table role="presentation" class="main">
 
+              <!-- START MAIN CONTENT AREA -->
+              <tr>
+                <td class="wrapper">
+                  <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td>
+                        <p>{{ $inquiry['message'] }}</p></br></br>
+                        <p>{{ $inquiry['name'] }}</p>
+                        <p>{{ $inquiry['contact'] }}</p>
+                        <p>{{ $inquiry['email'] }}</p>
+
+                        <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
+                          <tbody>
+                            <tr>
+                              <td align="left">
+                                <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                                  <tbody>
+                                    <tr>
+                                      <td><a href="https://emberlinestudios.com:2096" target="_blank">Go to Mailbox</a> </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+
+            <!-- END MAIN CONTENT AREA -->
+            </table>
+            <!-- END CENTERED WHITE CONTAINER -->
+
+            <!-- START FOOTER -->
+            <div class="footer">
+              <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td class="content-block">
+                    <span class="apple-link">Copyright © <?=date('Y')?> Emberline Studios® - a design agency</span>
+                  </td>
+                </tr>
+                <tr>
+                </tr>
+              </table>
+            </div>
+            <!-- END FOOTER -->
+
+          </div>
+        </td>
+        <td>&nbsp;</td>
+      </tr>
+    </table>
+  </body>
 </html>
