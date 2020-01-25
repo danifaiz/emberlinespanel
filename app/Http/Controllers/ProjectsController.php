@@ -320,9 +320,8 @@ class ProjectsController extends Controller
             'email'=> $request->input('email')
         ];
         
-        Mail::to($request->input('email'))->send(new InquiryMail($inquiry));
-        
-        return array("status"=>"success","message"=>"Email was sent!");
+        $result = Mail::to($request->input('email'))->send(new InquiryMail($inquiry));
+        return array("status"=>"Thank you","message"=>"We've received your request, our team will get in touch with you shortly.");
     }
     
 }

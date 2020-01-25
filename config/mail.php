@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+    'host' => env('MAIL_HOST', 'emberlinestudios.com'),
 
     /*
     |--------------------------------------------------------------------------
@@ -56,7 +56,7 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'admin@emberlinestudios.com'),
+        'address' => env('MAIL_FROM_ADDRESS', 'support@emberlinestudios.com'),
         'name' => env('MAIL_FROM_NAME', 'Emberlinestudios'),
     ],
 
@@ -136,8 +136,8 @@ return [
     'stream' => [
         'ssl' => [
            'allow_self_signed' => true,
-           'verify_peer' => false,
-           'verify_peer_name' => false,
+           'verify_peer' => true,
+           'verify_peer_name' => true,
         ],
      ],
 
