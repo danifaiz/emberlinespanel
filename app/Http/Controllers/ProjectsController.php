@@ -60,9 +60,9 @@ class ProjectsController extends Controller
     public function setCloudinarySecureLinks() {
         // $files = Storage::disk('local')->allFiles();
         // dd($files);
-        DB::raw("UPDATE projects
+        DB::statement("UPDATE projects
         SET image_url = REPLACE(image_url, 'http', 'https')");
-        DB::raw("UPDATE projects_gallery
+        DB::statement("UPDATE projects_gallery
         SET image_url = REPLACE(image_url, 'http', 'https')");
         return ["message"=>"success"];
     }
