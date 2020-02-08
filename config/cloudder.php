@@ -21,7 +21,7 @@ return [
 
     'scaling'    => [
         'format' => 'webp',
-        "fetch_format"=>"auto"
+        'fetch_format' => 'auto',
         'width'  => 150,
         'height' => 150,
         'crop'   => 'fit',
