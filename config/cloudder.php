@@ -20,8 +20,7 @@ return [
     'apiSecret'  => env('CLOUDINARY_API_SECRET','dcQGk20i2FaVql6SKG2vyHmE1zk'),
 
     'scaling'    => [
-        //'format' => 'png',
-        'fetch_format' => 'auto',
+        'format' => 'webp',
         'width'  => 150,
         'height' => 150,
         'crop'   => 'fit',
