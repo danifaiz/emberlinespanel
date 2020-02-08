@@ -124,7 +124,7 @@ class ProjectsController extends Controller
 
                     list($width, $height) = getimagesize($project_image_name);
 
-                    $project_image_url= Cloudder::secureShow(Cloudder::getPublicId(), ["width" => $width, "height"=>$height]);
+                    $project_image_url= Cloudder::secureShow(Cloudder::getPublicId(), ["width" => $width, "height"=>$height, "fetch_format"=>"auto"]);
         
                     $projectImage = $filename . "_" . time() . "." . $fileExt;
 
