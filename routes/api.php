@@ -24,4 +24,4 @@ Route::get('project/{projectId}', 'ProjectsController@show');
 
 Route::post('/sendInquiry', 'ProjectsController@mail');
 
-Route::get("/setCloudinarySecureLinks","ProjectsController@setCloudinarySecureLinks");
+Route::post("/sendebook","ProjectsController@sendBook");

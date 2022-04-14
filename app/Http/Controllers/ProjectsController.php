@@ -325,9 +325,29 @@ class ProjectsController extends Controller
             'email'=> $request->input('email')
         ];
         $emails = ['abrar@emberlinestudios.com', 'asad@emberlinestudios.com','saad@emberlinestudios.com','hello@emberlinestudios.com'];
-        // $emails = ['xmark030@gmail.com', 'danifaiz30@gmail.com'];
         $result = Mail::to($emails)->send(new InquiryMail($inquiry));
         return array("status"=>"Thank you","message"=>"We've received your request, our team will get in touch with you shortly.");
     }
     
+    //Send PDF File via Email
+    public function sendBook(Request $request)
+    {
+        $data["email"] = $request->input('email');
+        $data["title"] = "Download Branding Guidelines Book";
+        $data["body"] = "Identity from scratch without burning your savings in just 1 week, Guaranteed. SAY GOODBYE TO EXPENSIVE EXPERTS WHO WILL DO EXACTLY WHAT THIS BOOK TELLS YOU TO DO! Please find attachment below.";
+        $files = [
+            public_path() . '/' . 'files/ebook.pdf'
+        ];
+  
+        Mail::send('emails.brandingBook', $data, function($message)use($data, $files) {
+            $message->to($data["email"], $data["email"])
+                    ->subject($data["title"]);
+ 
+            foreach ($files as $file){
+                $message->attach($file);
+            }
+        });
+ 
+        return array("status"=>"success","message"=>"We have sent you an email. Please check your inbox!");
+    }
 }
